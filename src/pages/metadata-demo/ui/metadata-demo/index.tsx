@@ -1,26 +1,30 @@
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 
-export default function MetadataDemo() {
-  const [activeTab, setActiveTab] = useState<"old" | "new">("new")
-  const [pageTitle, setPageTitle] = useState("Моя страница")
-  const [pageDescription, setPageDescription] = useState("Описание моей страницы")
-  const [showMetaTags, setShowMetaTags] = useState(true)
+export const MetadataDemo = () => {
+  const [activeTab, setActiveTab] = useState<'old' | 'new'>('new');
+  const [pageTitle, setPageTitle] = useState('Моя страница');
+  const [pageDescription, setPageDescription] = useState('Описание моей страницы');
+  const [showMetaTags, setShowMetaTags] = useState(true);
 
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex border-b mb-6">
           <button
-            className={`px-4 py-2 ${activeTab === "old" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("old")}
+            className={`px-4 py-2 ${
+              activeTab === 'old' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('old')}
           >
             React 18 и ранее
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === "new" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("new")}
+            className={`px-4 py-2 ${
+              activeTab === 'new' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('new')}
           >
             React 19
           </button>
@@ -28,7 +32,9 @@ export default function MetadataDemo() {
 
         <div className="space-y-4 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Заголовок страницы</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Заголовок страницы
+            </label>
             <input
               type="text"
               value={pageTitle}
@@ -38,7 +44,9 @@ export default function MetadataDemo() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Описание страницы</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Описание страницы
+            </label>
             <textarea
               value={pageDescription}
               onChange={(e) => setPageDescription(e.target.value)}
@@ -61,10 +69,18 @@ export default function MetadataDemo() {
           </div>
         </div>
 
-        {activeTab === "old" ? (
-          <OldApproach title={pageTitle} description={pageDescription} showMetaTags={showMetaTags} />
+        {activeTab === 'old' ? (
+          <OldApproach
+            title={pageTitle}
+            description={pageDescription}
+            showMetaTags={showMetaTags}
+          />
         ) : (
-          <NewApproach title={pageTitle} description={pageDescription} showMetaTags={showMetaTags} />
+          <NewApproach
+            title={pageTitle}
+            description={pageDescription}
+            showMetaTags={showMetaTags}
+          />
         )}
       </div>
 
@@ -126,22 +142,28 @@ function Page() {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Имитация подхода React 18 и ранее
-function OldApproach({
+const OldApproach = ({
   title,
   description,
   showMetaTags,
-}: { title: string; description: string; showMetaTags: boolean }) {
+}: {
+  title: string;
+  description: string;
+  showMetaTags: boolean;
+}) => {
   // В реальном приложении React 18 здесь был бы useEffect или react-helmet
   return (
     <div className="border p-4 rounded-md">
       <h2 className="text-lg font-semibold mb-4">Подход в React 18 и ранее</h2>
 
       <div className="p-4 bg-gray-100 rounded-md mb-4">
-        <p className="text-sm text-gray-700 mb-2">В React 18 и ранее для управления метаданными использовались:</p>
+        <p className="text-sm text-gray-700 mb-2">
+          В React 18 и ранее для управления метаданными использовались:
+        </p>
         <ul className="list-disc list-inside text-sm text-gray-600">
           <li>Библиотека react-helmet</li>
           <li>Ручное обновление document.title в useEffect</li>
@@ -159,7 +181,7 @@ function MyPage() {
     <>
       <Helmet>
         <title>${title}</title>
-        ${showMetaTags ? `<meta name="description" content="${description}" />` : ""}
+        ${showMetaTags ? `<meta name="description" content="${description}" />` : ''}
       </Helmet>
       <div>Содержимое страницы...</div>
     </>
@@ -168,15 +190,19 @@ function MyPage() {
         </pre>
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Новый подход в React 19
-function NewApproach({
+const NewApproach = ({
   title,
   description,
   showMetaTags,
-}: { title: string; description: string; showMetaTags: boolean }) {
+}: {
+  title: string;
+  description: string;
+  showMetaTags: boolean;
+}) => {
   return (
     <div className="border p-4 rounded-md">
       <h2 className="text-lg font-semibold mb-4">Подход в React 19</h2>
@@ -186,7 +212,9 @@ function NewApproach({
       {showMetaTags && <meta name="description" content={description} />}
 
       <div className="p-4 bg-gray-100 rounded-md mb-4">
-        <p className="text-sm text-gray-700 mb-2">В React 19 метаданные можно размещать прямо в JSX компонентов:</p>
+        <p className="text-sm text-gray-700 mb-2">
+          В React 19 метаданные можно размещать прямо в JSX компонентов:
+        </p>
         <ul className="list-disc list-inside text-sm text-gray-600">
           <li>Теги автоматически перемещаются в &lt;head&gt;</li>
           <li>Работает как в клиентском, так и в серверном рендеринге</li>
@@ -201,7 +229,7 @@ function NewApproach({
   return (
     <div>
       <title>${title}</title>
-      ${showMetaTags ? `<meta name="description" content="${description}" />` : ""}
+      ${showMetaTags ? `<meta name="description" content="${description}" />` : ''}
       <div>Содержимое страницы...</div>
     </div>
   );
@@ -211,11 +239,10 @@ function NewApproach({
 
       <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
         <p className="text-sm text-yellow-700">
-          <strong>Примечание:</strong> В этом демо метаданные действительно применяются к текущей странице. Попробуйте
-          изменить заголовок и посмотрите на вкладку браузера!
+          <strong>Примечание:</strong> В этом демо метаданные действительно применяются к текущей
+          странице. Попробуйте изменить заголовок и посмотрите на вкладку браузера!
         </p>
       </div>
     </div>
-  )
-}
-
+  );
+};
