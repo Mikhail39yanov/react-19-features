@@ -1,4 +1,4 @@
-import { OptimisticDemoPage } from '@/pages/optimistic-demo';
+import { OptimisticDemoPage } from '@/src/pages/optimistic-demo';
 
 export default function OptimisticDemo() {
   return <OptimisticDemoPage />;
