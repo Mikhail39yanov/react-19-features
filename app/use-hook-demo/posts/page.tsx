@@ -1,4 +1,4 @@
-export default function PostsWithUseHookPage() {
+export default function PostsWithUseHook() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Загрузка постов с хуком use</h1>
@@ -11,8 +11,8 @@ export default function PostsWithUseHookPage() {
           <div key={i} className="bg-white p-5 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-3 line-clamp-2">Пример поста #{i + 1}</h2>
             <p className="text-gray-600 mb-4 line-clamp-3">
-              Этот пост имитирует данные, которые были бы загружены с использованием хука use. В реальном приложении с
-              React 19 здесь были бы настоящие данные с сервера.
+              Этот пост имитирует данные, которые были бы загружены с использованием хука use. В
+              реальном приложении с React 19 здесь были бы настоящие данные с сервера.
             </p>
             <div className="text-sm text-gray-500">Пост #{i + 1}</div>
           </div>
@@ -22,8 +22,9 @@ export default function PostsWithUseHookPage() {
       <div className="mt-8 p-4 bg-gray-50 rounded-md border border-gray-200 max-w-3xl mx-auto">
         <h3 className="text-lg font-semibold mb-2">Использование use с fetch API</h3>
         <p className="text-sm text-gray-700">
-          В этом примере мы имитируем использование хука use для чтения данных, полученных через fetch API. В React 19
-          промис создается вне компонента и кэшируется, чтобы избежать предупреждений React.
+          В этом примере мы имитируем использование хука use для чтения данных, полученных через
+          fetch API. В React 19 промис создается вне компонента и кэшируется, чтобы избежать
+          предупреждений React.
         </p>
         <pre className="mt-2 p-2 bg-gray-100 rounded text-xs overflow-x-auto">
           {`// Кэшированный промис (вне компонента)
@@ -43,6 +44,5 @@ function PostsList() {
         </a>
       </div>
     </div>
-  )
+  );
 }
-

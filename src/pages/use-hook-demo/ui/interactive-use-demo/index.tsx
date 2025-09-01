@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react';
 
 // Имитация API для получения данных
 const fetchData = (delay = 1500) => {
@@ -9,26 +9,26 @@ const fetchData = (delay = 1500) => {
       resolve([
         {
           id: 1,
-          title: "Что такое React 19?",
-          content: "React 19 - это новая версия библиотеки React с множеством улучшений...",
+          title: 'Что такое React 19?',
+          content: 'React 19 - это новая версия библиотеки React с множеством улучшений...',
         },
         {
           id: 2,
-          title: "Хук use",
-          content: "Хук use позволяет читать значения промисов прямо в рендере компонента...",
+          title: 'Хук use',
+          content: 'Хук use позволяет читать значения промисов прямо в рендере компонента...',
         },
         {
           id: 3,
-          title: "Suspense и Error Boundary",
-          content: "Suspense позволяет показывать запасной UI во время загрузки данных...",
+          title: 'Suspense и Error Boundary',
+          content: 'Suspense позволяет показывать запасной UI во время загрузки данных...',
         },
-      ])
-    }, delay)
-  })
-}
+      ]);
+    }, delay);
+  });
+};
 
-export default function InteractiveUseDemo() {
-  const [activeTab, setActiveTab] = useState<"traditional" | "modern">("traditional")
+export const InteractiveUseDemo = () => {
+  const [activeTab, setActiveTab] = useState<'traditional' | 'modern'>('traditional');
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
@@ -36,65 +36,71 @@ export default function InteractiveUseDemo() {
 
       <div className="flex border-b mb-6">
         <button
-          className={`px-4 py-2 ${activeTab === "traditional" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-          onClick={() => setActiveTab("traditional")}
+          className={`px-4 py-2 ${
+            activeTab === 'traditional'
+              ? 'border-b-2 border-blue-500 text-blue-600'
+              : 'text-gray-500'
+          }`}
+          onClick={() => setActiveTab('traditional')}
         >
           Традиционный подход
         </button>
         <button
-          className={`px-4 py-2 ${activeTab === "modern" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-          onClick={() => setActiveTab("modern")}
+          className={`px-4 py-2 ${
+            activeTab === 'modern' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+          }`}
+          onClick={() => setActiveTab('modern')}
         >
           Подход с use (имитация)
         </button>
       </div>
 
-      {activeTab === "traditional" ? <TraditionalApproach /> : <ModernApproach />}
+      {activeTab === 'traditional' ? <TraditionalApproach /> : <ModernApproach />}
     </div>
-  )
-}
+  );
+};
 
 // Компонент с традиционным подходом (React 18)
-function TraditionalApproach() {
-  const [posts, setPosts] = useState<{ id: number; title: string; content: string }[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [buttonClicked, setButtonClicked] = useState(false)
+const TraditionalApproach = () => {
+  const [posts, setPosts] = useState<{ id: number; title: string; content: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [buttonClicked, setButtonClicked] = useState(false);
 
   useEffect(() => {
-    if (!buttonClicked) return
+    if (!buttonClicked) return;
 
     async function loadData() {
       try {
-        setIsLoading(true)
-        setError(null)
-        const data = await fetchData()
-        setPosts(data)
+        setIsLoading(true);
+        setError(null);
+        const data = await fetchData();
+        setPosts(data);
       } catch (err) {
-        setError("Произошла ошибка при загрузке данных")
-        console.error(err)
+        setError('Произошла ошибка при загрузке данных');
+        console.error(err);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
 
-    loadData()
-  }, [buttonClicked])
+    loadData();
+  }, [buttonClicked]);
 
   return (
     <div>
       <div className="mb-4 p-4 bg-gray-50 rounded-md">
         <h3 className="font-semibold mb-2">React 18: useEffect + useState</h3>
         <p className="text-sm text-gray-600 mb-4">
-          В традиционном подходе мы используем useEffect для запуска загрузки данных и useState для управления
-          состоянием загрузки.
+          В традиционном подходе мы используем useEffect для запуска загрузки данных и useState для
+          управления состоянием загрузки.
         </p>
         <button
           onClick={() => setButtonClicked(true)}
           disabled={isLoading}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
         >
-          {isLoading ? "Загрузка..." : "Загрузить данные"}
+          {isLoading ? 'Загрузка...' : 'Загрузить данные'}
         </button>
       </div>
 
@@ -155,35 +161,35 @@ function PostsList() {
         </pre>
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Компонент, имитирующий подход с use (React 19)
-function ModernApproach() {
-  const [shouldLoad, setShouldLoad] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [posts, setPosts] = useState<{ id: number; title: string; content: string }[]>([])
+const ModernApproach = () => {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState<{ id: number; title: string; content: string }[]>([]);
 
   // Имитация поведения хука use
   useEffect(() => {
-    if (!shouldLoad) return
+    if (!shouldLoad) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     // Имитируем поведение Suspense
     fetchData(1500).then((data) => {
-      setPosts(data)
-      setIsLoading(false)
-    })
-  }, [shouldLoad])
+      setPosts(data);
+      setIsLoading(false);
+    });
+  }, [shouldLoad]);
 
   return (
     <div>
       <div className="mb-4 p-4 bg-gray-50 rounded-md">
         <h3 className="font-semibold mb-2">React 19: use + Suspense (имитация)</h3>
         <p className="text-sm text-gray-600 mb-4">
-          В новом подходе с хуком use мы можем "читать" значение промиса прямо в рендере компонента. React автоматически
-          приостановит рендер, пока данные не будут загружены.
+          В новом подходе с хуком use мы можем "читать" значение промиса прямо в рендере компонента.
+          React автоматически приостановит рендер, пока данные не будут загружены.
         </p>
         {!shouldLoad && (
           <button
@@ -206,7 +212,7 @@ function ModernApproach() {
             </div>
           )}
 
-          <div className={`space-y-4 ${isLoading ? "opacity-25" : ""}`}>
+          <div className={`space-y-4 ${isLoading ? 'opacity-25' : ''}`}>
             {posts.map((post) => (
               <div key={post.id} className="p-4 border rounded-md">
                 <h3 className="font-semibold">{post.title}</h3>
@@ -244,6 +250,5 @@ function PostsList() {
         </pre>
       </div>
     </div>
-  )
-}
-
+  );
+};

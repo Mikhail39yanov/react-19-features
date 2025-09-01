@@ -1,13 +1,14 @@
-"use client"
+'use client';
 
-import DemoTabs from "../../../components/ui/demo-tabs"
+import { DemoTabs } from '@/components/ui/demo-tabs';
 
-export default function UseHookComparisonPage() {
+export default function UseHookComparison() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Сравнение подходов к загрузке данных</h1>
       <p className="text-gray-600 mb-8 text-center max-w-2xl mx-auto">
-        Этот пример демонстрирует разницу между традиционным подходом с useEffect и новым подходом с хуком use.
+        Этот пример демонстрирует разницу между традиционным подходом с useEffect и новым подходом с
+        хуком use.
       </p>
 
       <div className="mb-8">
@@ -21,8 +22,8 @@ export default function UseHookComparisonPage() {
                     <div key={id} className="p-4 border rounded-md">
                       <h3 className="font-semibold">Пост #{id} с традиционным подходом</h3>
                       <p className="text-gray-600 mt-2">
-                        Этот пост загружен с использованием useEffect и useState. Требуется явное управление состоянием
-                        загрузки и обработка ошибок.
+                        Этот пост загружен с использованием useEffect и useState. Требуется явное
+                        управление состоянием загрузки и обработка ошибок.
                       </p>
                     </div>
                   ))}
@@ -47,8 +48,8 @@ export default function UseHookComparisonPage() {
                     <div key={id} className="p-4 border rounded-md">
                       <h3 className="font-semibold">Пост #{id} с новым подходом</h3>
                       <p className="text-gray-600 mt-2">
-                        Этот пост загружен с использованием хука use. Код более декларативный, без явного управления
-                        состоянием загрузки.
+                        Этот пост загружен с использованием хука use. Код более декларативный, без
+                        явного управления состоянием загрузки.
                       </p>
                     </div>
                   ))}
@@ -77,8 +78,8 @@ export default function UseHookComparisonPage() {
                 </p>
                 <ul className="list-disc list-inside text-gray-700 space-y-1">
                   <li>
-                    <strong>React 18 и ранее</strong>: useEffect + useState для загрузки данных после монтирования
-                    компонента
+                    <strong>React 18 и ранее</strong>: useEffect + useState для загрузки данных
+                    после монтирования компонента
                   </li>
                   <li>
                     <strong>React 19</strong>: хук use + Suspense для декларативной загрузки данных
@@ -89,23 +90,26 @@ export default function UseHookComparisonPage() {
               <div>
                 <h3 className="text-lg font-bold mb-2">Традиционный подход (useEffect)</h3>
                 <p className="text-gray-700">
-                  В традиционном подходе мы используем useEffect для запуска загрузки данных после монтирования
-                  компонента. Мы также должны вручную управлять состоянием загрузки, ошибками и результатом.
+                  В традиционном подходе мы используем useEffect для запуска загрузки данных после
+                  монтирования компонента. Мы также должны вручную управлять состоянием загрузки,
+                  ошибками и результатом.
                 </p>
                 <p className="text-gray-700">
-                  Этот подход требует много шаблонного кода и условного рендеринга на основе состояния.
+                  Этот подход требует много шаблонного кода и условного рендеринга на основе
+                  состояния.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-bold mb-2">Новый подход (use + Suspense)</h3>
                 <p className="text-gray-700">
-                  В новом подходе с хуком use мы можем "читать" значение промиса прямо в рендере компонента. React
-                  автоматически приостановит рендер компонента, пока данные не будут загружены.
+                  В новом подходе с хуком use мы можем "читать" значение промиса прямо в рендере
+                  компонента. React автоматически приостановит рендер компонента, пока данные не
+                  будут загружены.
                 </p>
                 <p className="text-gray-700">
-                  Этот подход более декларативный, требует меньше шаблонного кода и позволяет писать асинхронный код в
-                  синхронном стиле.
+                  Этот подход более декларативный, требует меньше шаблонного кода и позволяет писать
+                  асинхронный код в синхронном стиле.
                 </p>
               </div>
             </div>
@@ -215,6 +219,5 @@ function App() {
         </a>
       </div>
     </div>
-  )
+  );
 }
-
