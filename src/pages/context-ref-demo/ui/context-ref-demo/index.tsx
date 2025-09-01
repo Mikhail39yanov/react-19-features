@@ -1,38 +1,42 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { createContext, useContext, useState, useRef, forwardRef } from "react"
+import { createContext, useContext, useState, useRef, forwardRef } from 'react';
 
-export default function ContextRefDemo() {
-  const [activeTab, setActiveTab] = useState<"context" | "ref">("context")
+export const ContextRefDemo = () => {
+  const [activeTab, setActiveTab] = useState<'context' | 'ref'>('context');
 
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex border-b mb-6">
           <button
-            className={`px-4 py-2 ${activeTab === "context" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("context")}
+            className={`px-4 py-2 ${
+              activeTab === 'context' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('context')}
           >
             Context API
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === "ref" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("ref")}
+            className={`px-4 py-2 ${
+              activeTab === 'ref' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('ref')}
           >
             Ref API
           </button>
         </div>
 
-        {activeTab === "context" ? <ContextDemo /> : <RefDemo />}
+        {activeTab === 'context' ? <ContextDemo /> : <RefDemo />}
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Демонстрация улучшений Context
-function ContextDemo() {
+const ContextDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Улучшения Context API</h2>
@@ -82,28 +86,30 @@ const ThemeContext = createContext("light");
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Старый подход к контексту
-function OldContextExample() {
+const OldContextExample = () => {
   // Создаем контекст
-  const ThemeContext = createContext<string>("light")
+  const ThemeContext = createContext<string>('light');
 
   // Компонент, использующий контекст
   function ThemedButton() {
-    const theme = useContext(ThemeContext)
+    const theme = useContext(ThemeContext);
     return (
       <button
-        className={`px-4 py-2 rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"}`}
+        className={`px-4 py-2 rounded ${
+          theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'
+        }`}
       >
         Тема: {theme}
       </button>
-    )
+    );
   }
 
   // Демонстрация
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   return (
     <div className="p-4 border border-dashed border-gray-300 rounded-md">
@@ -112,7 +118,7 @@ function OldContextExample() {
           Текущая тема: <b>{theme}</b>
         </span>
         <button
-          onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
+          onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
           className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded"
         >
           Переключить
@@ -125,28 +131,30 @@ function OldContextExample() {
         </div>
       </ThemeContext.Provider>
     </div>
-  )
-}
+  );
+};
 
 // Новый подход к контексту
-function NewContextExample() {
+const NewContextExample = () => {
   // Создаем контекст
-  const ThemeContext = createContext<string>("light")
+  const ThemeContext = createContext<string>('light');
 
   // Компонент, использующий контекст
   function ThemedButton() {
-    const theme = useContext(ThemeContext)
+    const theme = useContext(ThemeContext);
     return (
       <button
-        className={`px-4 py-2 rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"}`}
+        className={`px-4 py-2 rounded ${
+          theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'
+        }`}
       >
         Тема: {theme}
       </button>
-    )
+    );
   }
 
   // Демонстрация
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   return (
     <div className="p-4 border border-dashed border-gray-300 rounded-md">
@@ -155,7 +163,7 @@ function NewContextExample() {
           Текущая тема: <b>{theme}</b>
         </span>
         <button
-          onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
+          onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
           className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded"
         >
           Переключить
@@ -168,11 +176,11 @@ function NewContextExample() {
         </div>
       </ThemeContext>
     </div>
-  )
-}
+  );
+};
 
 // Демонстрация улучшений Ref
-function RefDemo() {
+const RefDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Улучшения Ref API</h2>
@@ -224,35 +232,37 @@ const inputRef = useRef(null);
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Старый подход к рефам
-function OldRefExample() {
+const OldRefExample = () => {
   // Создаем компонент с forwardRef
-  const OldInput = forwardRef<HTMLInputElement, { placeholder?: string }>(({ placeholder }, ref) => {
-    return (
-      <input
-        ref={ref}
-        placeholder={placeholder}
-        className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-      />
-    )
-  })
+  const OldInput = forwardRef<HTMLInputElement, { placeholder?: string }>(
+    ({ placeholder }, ref) => {
+      return (
+        <input
+          ref={ref}
+          placeholder={placeholder}
+          className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        />
+      );
+    },
+  );
 
   // Демонстрация
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [value, setValue] = useState("")
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState('');
 
   function handleFocus() {
     if (inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
   }
 
   function handleGetValue() {
     if (inputRef.current) {
-      setValue(inputRef.current.value)
+      setValue(inputRef.current.value);
     }
   }
 
@@ -263,10 +273,16 @@ function OldRefExample() {
       </div>
 
       <div className="flex space-x-2">
-        <button onClick={handleFocus} className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded">
+        <button
+          onClick={handleFocus}
+          className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded"
+        >
           Фокус
         </button>
-        <button onClick={handleGetValue} className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded">
+        <button
+          onClick={handleGetValue}
+          className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded"
+        >
           Получить значение
         </button>
       </div>
@@ -277,18 +293,18 @@ function OldRefExample() {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 // Новый подход к рефам
-function NewRefExample() {
+const NewRefExample = () => {
   // Создаем компонент с прямым ref
   function NewInput({
     placeholder,
     ref,
   }: {
-    placeholder?: string
-    ref?: React.Ref<HTMLInputElement>
+    placeholder?: string;
+    ref?: React.Ref<HTMLInputElement>;
   }) {
     return (
       <input
@@ -296,22 +312,22 @@ function NewRefExample() {
         placeholder={placeholder}
         className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
       />
-    )
+    );
   }
 
   // Демонстрация
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [value, setValue] = useState("")
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState('');
 
   function handleFocus() {
     if (inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
   }
 
   function handleGetValue() {
     if (inputRef.current) {
-      setValue(inputRef.current.value)
+      setValue(inputRef.current.value);
     }
   }
 
@@ -322,10 +338,16 @@ function NewRefExample() {
       </div>
 
       <div className="flex space-x-2">
-        <button onClick={handleFocus} className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded">
+        <button
+          onClick={handleFocus}
+          className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded"
+        >
           Фокус
         </button>
-        <button onClick={handleGetValue} className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded">
+        <button
+          onClick={handleGetValue}
+          className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded"
+        >
           Получить значение
         </button>
       </div>
@@ -336,6 +358,5 @@ function NewRefExample() {
         </div>
       )}
     </div>
-  )
-}
-
+  );
+};
