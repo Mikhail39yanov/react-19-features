@@ -1,43 +1,55 @@
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 
-export default function SSRDemo() {
-  const [activeTab, setActiveTab] = useState<"prerender" | "streaming" | "hydration">("prerender")
+export const SSRDemo = () => {
+  const [activeTab, setActiveTab] = useState<'prerender' | 'streaming' | 'hydration'>('prerender');
 
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex border-b mb-6 overflow-x-auto">
           <button
-            className={`px-4 py-2 whitespace-nowrap ${activeTab === "prerender" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("prerender")}
+            className={`px-4 py-2 whitespace-nowrap ${
+              activeTab === 'prerender'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('prerender')}
           >
             prerender API
           </button>
           <button
-            className={`px-4 py-2 whitespace-nowrap ${activeTab === "streaming" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("streaming")}
+            className={`px-4 py-2 whitespace-nowrap ${
+              activeTab === 'streaming'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('streaming')}
           >
             Стриминг SSR
           </button>
           <button
-            className={`px-4 py-2 whitespace-nowrap ${activeTab === "hydration" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("hydration")}
+            className={`px-4 py-2 whitespace-nowrap ${
+              activeTab === 'hydration'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('hydration')}
           >
             Улучшения гидратации
           </button>
         </div>
 
-        {activeTab === "prerender" && <PrerenderDemo />}
-        {activeTab === "streaming" && <StreamingDemo />}
-        {activeTab === "hydration" && <HydrationDemo />}
+        {activeTab === 'prerender' && <PrerenderDemo />}
+        {activeTab === 'streaming' && <StreamingDemo />}
+        {activeTab === 'hydration' && <HydrationDemo />}
       </div>
     </div>
-  )
-}
+  );
+};
 
-function PrerenderDemo() {
+const PrerenderDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">prerender API для статической генерации</h2>
@@ -45,13 +57,15 @@ function PrerenderDemo() {
       <div className="p-4 border rounded-md mb-6">
         <h3 className="font-semibold mb-2">Что такое prerender?</h3>
         <p className="text-sm text-gray-700 mb-4">
-          prerender - это новый API в React 19, который позволяет отрендерить React-дерево в HTML, дождавшись выполнения
-          всех асинхронных операций внутри (например, данных, получаемых через Suspense).
+          prerender - это новый API в React 19, который позволяет отрендерить React-дерево в HTML,
+          дождавшись выполнения всех асинхронных операций внутри (например, данных, получаемых через
+          Suspense).
         </p>
         <p className="text-sm text-gray-700">
-          В отличие от традиционного renderToString, который мог вернуть HTML с "дырками" (плейсхолдеры от Suspense) и
-          требовал дополнительного прохода, prerender гарантирует, что на момент получения результата все
-          Suspense-промисы завершены и в HTML уже вставлен окончательный контент.
+          В отличие от традиционного renderToString, который мог вернуть HTML с "дырками"
+          (плейсхолдеры от Suspense) и требовал дополнительного прохода, prerender гарантирует, что
+          на момент получения результата все Suspense-промисы завершены и в HTML уже вставлен
+          окончательный контент.
         </p>
       </div>
 
@@ -102,15 +116,16 @@ const { prelude, content } = await prerender(<App />, {
           <li>Кэширование страниц с полным содержимым</li>
         </ul>
         <p className="text-sm text-blue-600 mt-4">
-          В Next.js 15 prerender может использоваться под капотом для реализации статической генерации страниц, где
-          важно получить готовый HTML с данными (например, при фоновой регенерации страницы).
+          В Next.js 15 prerender может использоваться под капотом для реализации статической
+          генерации страниц, где важно получить готовый HTML с данными (например, при фоновой
+          регенерации страницы).
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-function StreamingDemo() {
+const StreamingDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Стриминг SSR</h2>
@@ -118,13 +133,14 @@ function StreamingDemo() {
       <div className="p-4 border rounded-md mb-6">
         <h3 className="font-semibold mb-2">Что такое стриминг SSR?</h3>
         <p className="text-sm text-gray-700 mb-4">
-          Стриминг SSR - это техника, при которой HTML отдаётся частями по мере готовности, а не ждет полной загрузки
-          всех данных. React 18 ввел эту возможность, а React 19 улучшил её производительность и стабильность.
+          Стриминг SSR - это техника, при которой HTML отдаётся частями по мере готовности, а не
+          ждет полной загрузки всех данных. React 18 ввел эту возможность, а React 19 улучшил её
+          производительность и стабильность.
         </p>
         <p className="text-sm text-gray-700">
-          Стриминг работает в сочетании с Suspense: когда компонент "приостанавливается" из-за загрузки данных, React
-          может отправить HTML с заглушкой (fallback), а затем, когда данные будут готовы, отправить дополнительный HTML
-          для замены заглушки.
+          Стриминг работает в сочетании с Suspense: когда компонент "приостанавливается" из-за
+          загрузки данных, React может отправить HTML с заглушкой (fallback), а затем, когда данные
+          будут готовы, отправить дополнительный HTML для замены заглушки.
         </p>
       </div>
 
@@ -167,7 +183,9 @@ function StreamingDemo() {
           <p className="text-xs text-gray-600">
             1. Сервер отправляет <b>каркас</b> страницы <b>сразу</b>
           </p>
-          <p className="text-xs text-gray-600">2. Браузер начинает отображать UI и загружать ресурсы</p>
+          <p className="text-xs text-gray-600">
+            2. Браузер начинает отображать UI и загружать ресурсы
+          </p>
           <p className="text-xs text-gray-600">
             3. Сервер отправляет <b>дополнительные части</b> HTML по мере готовности данных
           </p>
@@ -187,15 +205,16 @@ function StreamingDemo() {
           <li>Улучшенная интеграция с Suspense</li>
         </ul>
         <p className="text-sm text-green-600 mt-4">
-          В Next.js 15 стриминг используется по умолчанию в App Router. Компоненты, обернутые в Suspense, будут
-          стримиться автоматически, а loading.js файлы создают Suspense-границы для целых страниц.
+          В Next.js 15 стриминг используется по умолчанию в App Router. Компоненты, обернутые в
+          Suspense, будут стримиться автоматически, а loading.js файлы создают Suspense-границы для
+          целых страниц.
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-function HydrationDemo() {
+const HydrationDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Улучшения гидратации</h2>
@@ -203,12 +222,12 @@ function HydrationDemo() {
       <div className="p-4 border rounded-md mb-6">
         <h3 className="font-semibold mb-2">Что такое гидратация?</h3>
         <p className="text-sm text-gray-700 mb-4">
-          Гидратация - это процесс, при котором React на клиенте "оживляет" HTML, сгенерированный на сервере, добавляя к
-          нему обработчики событий и состояние.
+          Гидратация - это процесс, при котором React на клиенте "оживляет" HTML, сгенерированный на
+          сервере, добавляя к нему обработчики событий и состояние.
         </p>
         <p className="text-sm text-gray-700">
-          React 19 значительно улучшил обработку ошибок гидратации и учёл моменты, которые мешали гидратации из-за
-          вмешательства сторонних скриптов или расширений браузера.
+          React 19 значительно улучшил обработку ошибок гидратации и учёл моменты, которые мешали
+          гидратации из-за вмешательства сторонних скриптов или расширений браузера.
         </p>
       </div>
 
@@ -259,25 +278,28 @@ Warning: Expected server HTML to contain a matching <div> in <div>.`}
         <h3 className="font-semibold mb-3">Ключевые улучшения гидратации в React 19:</h3>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <h4 className="text-sm font-semibold text-purple-700 mb-2">Устойчивость к внешним изменениям:</h4>
+            <h4 className="text-sm font-semibold text-purple-700 mb-2">
+              Устойчивость к внешним изменениям:
+            </h4>
             <p className="text-xs text-purple-600">
-              Если при гидратации встречаются лишние узлы в DOM, вставленные сторонними скриптами или расширениями
-              браузера, React 19 научился их игнорировать. Раньше любое расхождение приводило к ошибке и полной
-              перерисовке всего контейнера.
+              Если при гидратации встречаются лишние узлы в DOM, вставленные сторонними скриптами
+              или расширениями браузера, React 19 научился их игнорировать. Раньше любое расхождение
+              приводило к ошибке и полной перерисовке всего контейнера.
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-purple-700 mb-2">Информативные сообщения об ошибках:</h4>
+            <h4 className="text-sm font-semibold text-purple-700 mb-2">
+              Информативные сообщения об ошибках:
+            </h4>
             <p className="text-xs text-purple-600">
-              Сообщения об ошибках гидратации стали гораздо информативнее. Теперь при несоответствии HTML React выводит
-              одно подробное сообщение, в котором наглядно показывает, какой именно фрагмент не совпал, и перечисляет
-              возможные причины проблемы.
+              Сообщения об ошибках гидратации стали гораздо информативнее. Теперь при несоответствии
+              HTML React выводит одно подробное сообщение, в котором наглядно показывает, какой
+              именно фрагмент не совпал, и перечисляет возможные причины проблемы.
             </p>
           </div>
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
