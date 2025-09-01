@@ -1,35 +1,39 @@
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 
-export default function ResourcesDemo() {
-  const [activeTab, setActiveTab] = useState<"styles" | "scripts">("styles")
+export const ResourcesDemo = () => {
+  const [activeTab, setActiveTab] = useState<'styles' | 'scripts'>('styles');
 
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex border-b mb-6">
           <button
-            className={`px-4 py-2 ${activeTab === "styles" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("styles")}
+            className={`px-4 py-2 ${
+              activeTab === 'styles' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('styles')}
           >
             Загрузка стилей
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === "scripts" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("scripts")}
+            className={`px-4 py-2 ${
+              activeTab === 'scripts' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('scripts')}
           >
             Загрузка скриптов
           </button>
         </div>
 
-        {activeTab === "styles" ? <StylesDemo /> : <ScriptsDemo />}
+        {activeTab === 'styles' ? <StylesDemo /> : <ScriptsDemo />}
       </div>
     </div>
-  )
-}
+  );
+};
 
-function StylesDemo() {
+const StylesDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Управление стилями в React 19</h2>
@@ -41,7 +45,7 @@ function StylesDemo() {
             <li>Стили обычно импортировались в JS</li>
             <li>Или подключались в HTML-шаблоне</li>
             <li>Сложно контролировать порядок загрузки</li>
-            <li>Риск FOUC (мигание нестилизованного контента)</li>
+            <li>Риск FOUC (Flash of Unstyled Content) (мигание нестилизованного контента)</li>
           </ul>
           <div className="mt-4 p-3 bg-gray-100 rounded text-xs">
             <pre className="whitespace-pre-wrap">
@@ -125,17 +129,18 @@ import './styles.css';
 
         <div className="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
           <p className="text-sm text-blue-700">
-            <strong>Результат:</strong> React автоматически разместит оба стиля в &lt;head&gt;, но theme.css будет после
-            base.css, что позволит стилям темы переопределить базовые стили. Даже если Theme рендерится раньше Base в
-            дереве компонентов, порядок стилей будет правильным.
+            <strong>Результат:</strong> React автоматически разместит оба стиля в &lt;head&gt;, но
+            theme.css будет после base.css, что позволит стилям темы переопределить базовые стили.
+            Даже если Theme рендерится раньше Base в дереве компонентов, порядок стилей будет
+            правильным.
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-function ScriptsDemo() {
+const ScriptsDemo = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Управление скриптами в React 19</h2>
@@ -235,6 +240,5 @@ useEffect(() => {
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};

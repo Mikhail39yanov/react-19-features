@@ -1,0 +1,1 @@
+export { ResourcesDemoPage } from './ui';
