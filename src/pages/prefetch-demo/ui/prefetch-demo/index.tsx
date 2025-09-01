@@ -1,23 +1,25 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { preload } from "react-dom"
+import { useState } from 'react';
+import { preload } from 'react-dom';
 
-export default function PrefetchDemo() {
-  const [activeTab, setActiveTab] = useState<"overview" | "example">("overview")
-  const [showImage, setShowImage] = useState(false)
-  const [showFont, setShowFont] = useState(false)
+export const PrefetchDemo = () => {
+  const [activeTab, setActiveTab] = useState<'overview' | 'example'>('overview');
+  const [showImage, setShowImage] = useState(false);
+  const [showFont, setShowFont] = useState(false);
 
   // Демонстрация preload при наведении
   function handleImageHover() {
     // Предзагрузка изображения при наведении
-    preload("https://picsum.photos/800/400", { as: "image" })
+    preload('https://picsum.photos/800/400', { as: 'image' });
   }
 
   // Демонстрация preinit
   function handleFontHover() {
     // Предзагрузка шрифта при наведении
-    preload("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap", { as: "style" })
+    preload('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap', {
+      as: 'style',
+    });
   }
 
   return (
@@ -25,20 +27,26 @@ export default function PrefetchDemo() {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex border-b mb-6">
           <button
-            className={`px-4 py-2 ${activeTab === "overview" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("overview")}
+            className={`px-4 py-2 ${
+              activeTab === 'overview'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('overview')}
           >
             Обзор API
           </button>
           <button
-            className={`px-4 py-2 ${activeTab === "example" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"}`}
-            onClick={() => setActiveTab("example")}
+            className={`px-4 py-2 ${
+              activeTab === 'example' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('example')}
           >
             Интерактивный пример
           </button>
         </div>
 
-        {activeTab === "overview" ? (
+        {activeTab === 'overview' ? (
           <OverviewTab />
         ) : (
           <div>
@@ -52,7 +60,8 @@ export default function PrefetchDemo() {
               >
                 <h3 className="font-semibold mb-2">Предзагрузка изображения</h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Наведите курсор, чтобы начать предзагрузку изображения. Затем нажмите, чтобы отобразить его.
+                  Наведите курсор, чтобы начать предзагрузку изображения. Затем нажмите, чтобы
+                  отобразить его.
                 </p>
                 {showImage ? (
                   <img
@@ -77,7 +86,8 @@ export default function PrefetchDemo() {
               >
                 <h3 className="font-semibold mb-2">Предзагрузка шрифта</h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Наведите курсор, чтобы начать предзагрузку шрифта Roboto. Затем нажмите, чтобы применить его.
+                  Наведите курсор, чтобы начать предзагрузку шрифта Roboto. Затем нажмите, чтобы
+                  применить его.
                 </p>
                 {showFont && (
                   <link
@@ -85,8 +95,10 @@ export default function PrefetchDemo() {
                     href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
                   />
                 )}
-                <div className={`p-4 bg-gray-100 rounded ${showFont ? "font-[Roboto]" : ""}`}>
-                  <p className="mb-2">Пример текста со шрифтом {showFont ? "Roboto" : "по умолчанию"}</p>
+                <div className={`p-4 bg-gray-100 rounded ${showFont ? 'font-[Roboto]' : ''}`}>
+                  <p className="mb-2">
+                    Пример текста со шрифтом {showFont ? 'Roboto' : 'по умолчанию'}
+                  </p>
                   <p className="font-bold">Жирный текст для демонстрации</p>
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
@@ -98,37 +110,39 @@ export default function PrefetchDemo() {
             <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
               <h3 className="font-semibold mb-2 text-blue-700">Как это работает?</h3>
               <p className="text-sm text-blue-600 mb-2">
-                При наведении курсора на блок, React вызывает функцию preload, которая добавляет соответствующий тег
-                &lt;link rel="preload"&gt; в &lt;head&gt; документа. Браузер начинает загрузку ресурса в фоновом режиме.
+                При наведении курсора на блок, React вызывает функцию preload, которая добавляет
+                соответствующий тег &lt;link rel="preload"&gt; в &lt;head&gt; документа. Браузер
+                начинает загрузку ресурса в фоновом режиме.
               </p>
               <p className="text-sm text-blue-600">
-                Когда вы нажимаете на блок и ресурс отображается, он уже загружен или находится в процессе загрузки, что
-                ускоряет отображение.
+                Когда вы нажимаете на блок и ресурс отображается, он уже загружен или находится в
+                процессе загрузки, что ускоряет отображение.
               </p>
             </div>
           </div>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-function OverviewTab() {
+const OverviewTab = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Новые API для предварительной загрузки ресурсов</h2>
 
       <p className="text-gray-700 mb-6">
-        React 19 предоставляет набор функций для предварительной загрузки ресурсов, которые позволяют оптимизировать
-        производительность, заранее сообщая браузеру о ресурсах, которые понадобятся в ближайшее время.
+        React 19 предоставляет набор функций для предварительной загрузки ресурсов, которые
+        позволяют оптимизировать производительность, заранее сообщая браузеру о ресурсах, которые
+        понадобятся в ближайшее время.
       </p>
 
       <div className="space-y-6">
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">prefetchDNS(url)</h3>
           <p className="text-sm text-gray-600 mb-2">
-            Создает &lt;link rel="dns-prefetch" href="..."&gt;, подсказывая браузеру заранее разрешить DNS-имя
-            указанного хоста.
+            Создает &lt;link rel="dns-prefetch" href="..."&gt;, подсказывая браузеру заранее
+            разрешить DNS-имя указанного хоста.
           </p>
           <div className="p-3 bg-gray-100 rounded text-xs">
             <pre className="whitespace-pre-wrap">
@@ -146,8 +160,8 @@ prefetchDNS("https://api.example.com");
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">preconnect(url)</h3>
           <p className="text-sm text-gray-600 mb-2">
-            Создает &lt;link rel="preconnect" href="..."&gt;, инициируя заранее установление соединения (TCP handshake,
-            TLS) с указанным хостом.
+            Создает &lt;link rel="preconnect" href="..."&gt;, инициируя заранее установление
+            соединения (TCP handshake, TLS) с указанным хостом.
           </p>
           <div className="p-3 bg-gray-100 rounded text-xs">
             <pre className="whitespace-pre-wrap">
@@ -165,8 +179,8 @@ preconnect("https://api.example.com");
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">preload(url, options)</h3>
           <p className="text-sm text-gray-600 mb-2">
-            Создает &lt;link rel="preload" href="..."&gt; для начала загрузки указанного ресурса. В options обязательно
-            указывается тип ресурса через as.
+            Создает &lt;link rel="preload" href="..."&gt; для начала загрузки указанного ресурса. В
+            options обязательно указывается тип ресурса через as.
           </p>
           <div className="p-3 bg-gray-100 rounded text-xs">
             <pre className="whitespace-pre-wrap">
@@ -192,8 +206,8 @@ preload("/images/hero.jpg", { as: "image" });
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">preinit(scriptUrl, options)</h3>
           <p className="text-sm text-gray-600 mb-2">
-            Более "агрессивная" форма для скриптов: создает тег &lt;script&gt; с атрибутом async, чтобы не только начать
-            загрузку, но и выполнить скрипт сразу после загрузки.
+            Более "агрессивная" форма для скриптов: создает тег &lt;script&gt; с атрибутом async,
+            чтобы не только начать загрузку, но и выполнить скрипт сразу после загрузки.
           </p>
           <div className="p-3 bg-gray-100 rounded text-xs">
             <pre className="whitespace-pre-wrap">
@@ -227,6 +241,5 @@ preinit("/scripts/module.js", {
         </ul>
       </div>
     </div>
-  )
-}
-
+  );
+};
