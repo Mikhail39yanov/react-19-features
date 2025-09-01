@@ -1,6 +1,6 @@
 'use client';
 
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { PrefetchDemo } from './prefetch-demo';
 
 export const PrefetchDemoPage = () => {

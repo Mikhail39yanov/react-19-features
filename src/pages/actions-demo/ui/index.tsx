@@ -1,6 +1,6 @@
 import { ServerActionDemo } from './server-action-demo';
 import { OldVsNewForm } from './old-vs-new-form';
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { ActionsDemoForm } from './actions-demo-form';
 
 export const ActionsDemoPage = () => {

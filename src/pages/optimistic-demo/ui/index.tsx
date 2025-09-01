@@ -1,4 +1,4 @@
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { OptimisticCounter } from './optimistic-counter';
 
 export const OptimisticDemoPage = () => {

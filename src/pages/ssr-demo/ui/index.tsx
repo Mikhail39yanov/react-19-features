@@ -1,4 +1,4 @@
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { SSRDemo } from './ssr-demo';
 
 export const SSRDemoPage = () => {

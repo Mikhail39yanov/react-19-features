@@ -1,4 +1,4 @@
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { ContextRefDemo } from './context-ref-demo';
 
 export const ContextRefDemoPage = () => {

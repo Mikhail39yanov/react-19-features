@@ -1,4 +1,4 @@
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { InteractiveUseDemo } from './interactive-use-demo';
 
 export const UseHookDemoPage = () => {

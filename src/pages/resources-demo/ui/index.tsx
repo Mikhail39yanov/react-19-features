@@ -1,4 +1,4 @@
-import { DemoTabs } from '@/components/ui/demo-tabs';
+import { DemoTabs } from '@/src/shrared/ui/demo-tabs';
 import { ResourcesDemo } from './resources-demo';
 
 export const ResourcesDemoPage = () => {
