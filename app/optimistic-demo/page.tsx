@@ -1,5 +1,5 @@
 import OptimisticCounter from "../components/optimistic-counter"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function OptimisticDemoPage() {
   return (

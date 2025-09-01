@@ -1,5 +1,5 @@
 import ContextRefDemo from "../components/context-ref-demo"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function ContextRefDemoPage() {
   return (

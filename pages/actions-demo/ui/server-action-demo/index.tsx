@@ -1,32 +1,32 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { saveUserData } from "../actions/server-actions"
+import { useState } from 'react';
+import { saveUserData } from '../../lib/server-actions';
 
-export default function ServerActionDemo() {
-  const [message, setMessage] = useState<string | null>(null)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [isPending, setIsPending] = useState(false)
+export const ServerActionDemo = () => {
+  const [message, setMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   async function handleSubmit(formData: FormData) {
-    setIsPending(true)
-    setMessage(null)
+    setIsPending(true);
+    setMessage(null);
 
     try {
-      const result = await saveUserData(formData)
+      const result = await saveUserData(formData);
 
       if (result.success) {
-        setIsSuccess(true)
-        setMessage(result.message)
+        setIsSuccess(true);
+        setMessage(result.message);
       } else {
-        setIsSuccess(false)
-        setMessage(result.message)
+        setIsSuccess(false);
+        setMessage(result.message);
       }
     } catch (error) {
-      setIsSuccess(false)
-      setMessage("Произошла непредвиденная ошибка")
+      setIsSuccess(false);
+      setMessage('Произошла непредвиденная ошибка');
     } finally {
-      setIsPending(false)
+      setIsPending(false);
     }
   }
 
@@ -66,14 +66,16 @@ export default function ServerActionDemo() {
           disabled={isPending}
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
         >
-          {isPending ? "Сохранение..." : "Сохранить на сервере"}
+          {isPending ? 'Сохранение...' : 'Сохранить на сервере'}
         </button>
 
         {message && (
           <div
-            className={`p-3 ${isSuccess ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"} rounded-md`}
+            className={`p-3 ${
+              isSuccess ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
+            } rounded-md`}
           >
-            <p className={`text-sm ${isSuccess ? "text-green-600" : "text-red-600"}`}>{message}</p>
+            <p className={`text-sm ${isSuccess ? 'text-green-600' : 'text-red-600'}`}>{message}</p>
           </div>
         )}
       </form>
@@ -81,11 +83,10 @@ export default function ServerActionDemo() {
       <div className="mt-4 p-3 bg-gray-50 rounded-md text-sm">
         <p className="font-medium mb-1">Server Action:</p>
         <p className="text-gray-600">
-          Функция выполняется на сервере, имеет доступ к серверным ресурсам (БД, файловая система). Клиент просто
-          вызывает её через form action.
+          Функция выполняется на сервере, имеет доступ к серверным ресурсам (БД, файловая система).
+          Клиент просто вызывает её через form action.
         </p>
       </div>
     </div>
-  )
-}
-
+  );
+};

@@ -1,6 +1,6 @@
 "use client"
 
-import DemoTabs from "../../components/demo-tabs"
+import DemoTabs from "../../../components/ui/demo-tabs"
 
 export default function UseHookComparisonPage() {
   return (

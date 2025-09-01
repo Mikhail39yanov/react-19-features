@@ -1,4 +1,4 @@
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 import InteractiveUseDemo from "../components/interactive-use-demo"
 
 export default function UseHookDemoPage() {

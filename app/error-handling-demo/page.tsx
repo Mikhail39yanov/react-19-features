@@ -1,5 +1,5 @@
 import ErrorHandlingDemo from "../components/error-handling-demo"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function ErrorHandlingDemoPage() {
   return (

@@ -1,5 +1,5 @@
 import MetadataDemo from "../components/metadata-demo"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function MetadataDemoPage() {
   return (

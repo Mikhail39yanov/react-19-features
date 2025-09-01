@@ -1,11 +1,9 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
+import { useState, useActionState } from 'react';
 
-import { useState } from "react"
-import { useActionState } from "react"
-
-export default function OldVsNewForm() {
+export const OldVsNewForm = () => {
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <div className="p-6 bg-white rounded-lg shadow-md">
@@ -18,41 +16,41 @@ export default function OldVsNewForm() {
         <NewStyleForm />
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Традиционный подход с React 18
 function OldStyleForm() {
-  const [email, setEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState(false)
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault() // Предотвращаем стандартное поведение формы
+    e.preventDefault(); // Предотвращаем стандартное поведение формы
 
     // Сбрасываем состояния
-    setError(null)
-    setSuccess(false)
-    setIsSubmitting(true)
+    setError(null);
+    setSuccess(false);
+    setIsSubmitting(true);
 
     try {
       // Валидация
-      if (!email || !email.includes("@")) {
-        setError("Введите корректный email")
-        return
+      if (!email || !email.includes('@')) {
+        setError('Введите корректный email');
+        return;
       }
 
       // Имитация запроса к API
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Обработка успеха
-      setSuccess(true)
-      setEmail("") // Сброс поля вручную
+      setSuccess(true);
+      setEmail(''); // Сброс поля вручную
     } catch (err) {
-      setError("Произошла ошибка при отправке")
+      setError('Произошла ошибка при отправке');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -78,7 +76,7 @@ function OldStyleForm() {
         disabled={isSubmitting}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
       >
-        {isSubmitting ? "Отправка..." : "Подписаться"}
+        {isSubmitting ? 'Отправка...' : 'Подписаться'}
       </button>
 
       {error && (
@@ -103,30 +101,33 @@ function OldStyleForm() {
         </ul>
       </div>
     </form>
-  )
+  );
 }
 
 // Новый подход с React 19 Actions
 function NewStyleForm() {
-  const [state, action, isPending] = useActionState(async (_prevState: string | null, formData: FormData) => {
-    const email = formData.get("email")?.toString() || ""
+  const [state, action, isPending] = useActionState(
+    async (_prevState: string | null, formData: FormData) => {
+      const email = formData.get('email')?.toString() || '';
 
-    // Валидация
-    if (!email || !email.includes("@")) {
-      return "Введите корректный email"
-    }
+      // Валидация
+      if (!email || !email.includes('@')) {
+        return 'Введите корректный email';
+      }
 
-    // Имитация запроса к API
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+      // Имитация запроса к API
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Успех (null или специальный маркер)
-    return "success:Вы успешно подписались!"
-  }, null)
+      // Успех (null или специальный маркер)
+      return 'success:Вы успешно подписались!';
+    },
+    null,
+  );
 
   // Разделяем состояние на ошибку и успех
-  const isSuccess = state?.startsWith("success:")
-  const successMessage = isSuccess ? state.substring(8) : null
-  const errorMessage = !isSuccess ? state : null
+  const isSuccess = state?.startsWith('success:');
+  const successMessage = isSuccess && state ? state.substring(8) : null;
+  const errorMessage = !isSuccess ? state : null;
 
   return (
     <form action={action} className="space-y-4">
@@ -149,7 +150,7 @@ function NewStyleForm() {
         disabled={isPending}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
       >
-        {isPending ? "Отправка..." : "Подписаться"}
+        {isPending ? 'Отправка...' : 'Подписаться'}
       </button>
 
       {errorMessage && (
@@ -174,6 +175,5 @@ function NewStyleForm() {
         </ul>
       </div>
     </form>
-  )
+  );
 }
-

@@ -1,5 +1,5 @@
 import SSRDemo from "../components/ssr-demo"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function SSRDemoPage() {
   return (

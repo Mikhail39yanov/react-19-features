@@ -1,7 +1,7 @@
 "use client"
 
 import PrefetchDemo from "../components/prefetch-demo"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function PrefetchDemoPage() {
   return (

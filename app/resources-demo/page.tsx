@@ -1,5 +1,5 @@
 import ResourcesDemo from "../components/resources-demo"
-import DemoTabs from "../components/demo-tabs"
+import DemoTabs from "../../components/ui/demo-tabs"
 
 export default function ResourcesDemoPage() {
   return (
